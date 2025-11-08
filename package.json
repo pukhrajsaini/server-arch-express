@@ -10,7 +10,12 @@
     "prod": "NODE_ENV=prod nodemon --exec ts-node src/index.ts",
     "test": "NODE_ENV=test nodemon --exec ts-node src/index.ts",
     "build": "tsc",
-    "apidoc": "apidoc -i src -o assets/apidoc"
+    "apidoc": "apidoc -i src -o assets/apidoc",
+    "lint": "eslint src",
+    "lint:fix": "eslint src --fix",
+    "format": "prettier --write \"src/**/*.{ts,json}\"",
+    "format:check": "prettier --check \"src/**/*.{ts,json}\"",
+    "prepare": "husky"
   },
   "author": "",
   "license": "ISC",
@@ -50,7 +55,25 @@
     "@types/paypal-rest-sdk": "^1.7.9",
     "@types/sharp": "^0.32.0",
     "@types/slug": "^5.0.9",
+    "@typescript-eslint/eslint-plugin": "^8.46.3",
+    "@typescript-eslint/parser": "^8.46.3",
     "cross-env": "^10.0.0",
-    "ndb": "^1.1.5"
+    "eslint": "^9.39.1",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^5.5.4",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.2.6",
+    "ndb": "^1.1.5",
+    "prettier": "^3.6.2",
+    "typescript-eslint": "^8.46.3"
+  },
+  "lint-staged": {
+    "*.ts": [
+      "prettier --write",
+      "eslint --fix"
+    ],
+    "*.json": [
+      "prettier --write"
+    ]
   }
 }
