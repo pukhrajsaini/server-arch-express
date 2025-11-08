@@ -2,7 +2,7 @@ import { ServiceResponse } from "../../../interfaces";
 import { HttpStatus } from "../../../constants";
 import { ROLES } from "./role.constant";
 import RoleModel from "../../../models/role.model";
-import { LoggerUtil } from "../../../utils";
+import { LoggerUtil, OpenId } from "../../../utils";
 import adminService from "../admin/admin.service";
 
 class RoleService {
@@ -11,20 +11,25 @@ class RoleService {
 
     async createRole() {
         for (const role of ROLES) {
-            await RoleModel.findOneAndUpdate({
-                name: role.name
-            },
 
-                {
+            const isExists = await RoleModel.findOne({ name: role.name });
+            if (isExists) {
+                await RoleModel.findByIdAndUpdate(isExists._id, {
                     name: role.name,
                     permissions: role.permissions
-                },
-                {
-                    upsert: true
-                }
-            );
+                });
+
+                this.logger.log("Role updated");
+            } else {
+                const displayId = OpenId.generate(6,'ROLE');
+                await RoleModel.create({
+                    displayId,
+                    name: role.name,
+                    permissions: role.permissions
+                });
+                this.logger.log("Role created");
+            }
         }
-        this.logger.log("Roles created");
         await adminService.createAdmin();
     }
 

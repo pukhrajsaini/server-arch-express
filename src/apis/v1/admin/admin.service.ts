@@ -28,7 +28,8 @@ class AdminService {
                 email,
                 password: encryptedPassword,
                 name,
-                roleId: role._id
+                roleId: role._id,
+                displayId: OpenId.generate(6, 'A')
             });
             this.logger.log("Admin created");
         }

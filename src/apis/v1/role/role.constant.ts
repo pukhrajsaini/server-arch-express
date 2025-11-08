@@ -1,12 +1,9 @@
+import { IPermissions } from "../../../models/role.model"
+
 export enum AppModules {
     Admin = 'ADMIN',
-    User = 'USER',
-    Restaurant = 'RESTAURANT',
+    School = 'SCHOOL',
     Dashboard = 'DASHBOARD',
-    DeviceManagement = 'DEVICE_MANAGEMENT',
-    DeviceStatics = 'DEVICE_STATICS',
-    Settings = 'SETTINGS',
-    Notification = 'NOTIFICATION',
 }
 
 
@@ -19,31 +16,12 @@ export enum ApiActions {
 }
 
 
+const permissions:IPermissions[] = Object.values(AppModules).map((module) => ({ entity: module, actions: Object.values(ApiActions) }))
 
 
 export const ROLES = [
     {
         name: 'SUPER_ADMIN',
-        permissions: Object.values(AppModules),
-    },
-    {
-        name: 'INSTALLER',
-        permissions: [
-            AppModules.Restaurant,
-            AppModules.DeviceManagement,
-            AppModules.DeviceStatics,
-            AppModules.Settings,
-        ],
-    },
-    {
-        name: 'OPERATOR',
-        permissions: [
-            AppModules.Restaurant,
-            AppModules.Dashboard,
-            AppModules.DeviceManagement,
-            AppModules.DeviceStatics,
-            AppModules.Settings,
-            AppModules.Notification,
-        ],
+        permissions,
     }
 ]

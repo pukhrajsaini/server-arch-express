@@ -16,7 +16,7 @@ class AdminRoutes {
             setApiMetadata({
                 access: ApiAccess.Admin,
                 module: AppModules.Admin,
-                actions: ApiActions.Read
+                action: ApiActions.Read
             }),
             authenticate.admin,
             adminController.list
@@ -27,7 +27,7 @@ class AdminRoutes {
             setApiMetadata({
                 access: ApiAccess.Global,
                 module: AppModules.Admin,
-                actions: ApiActions.Read
+                action: ApiActions.Read
             }),
             authenticate.admin,
             adminController.myProfile
@@ -38,7 +38,7 @@ class AdminRoutes {
             setApiMetadata({
                 access: ApiAccess.Admin,
                 module: AppModules.Admin,
-                actions: ApiActions.Create
+                action: ApiActions.Create
             }),
             authenticate.admin,
             adminValidator.create,
@@ -48,8 +48,8 @@ class AdminRoutes {
             '/change-password',
             setApiMetadata({
                 access: ApiAccess.Admin,
-                module: AppModules.Settings,
-                actions: ApiActions.Update
+                module: AppModules.Admin,
+                action: ApiActions.Update
             }),
             authenticate.admin,
             adminValidator.changePassword,
@@ -60,7 +60,7 @@ class AdminRoutes {
             setApiMetadata({
                 access: ApiAccess.Admin,
                 module: AppModules.Admin,
-                actions: ApiActions.Delete
+                action: ApiActions.Delete
             }),
             authenticate.admin,
             adminController.delete

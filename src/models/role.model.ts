@@ -1,13 +1,21 @@
 import { Document, model, Schema, Types } from "mongoose";
 import { DB_MODELS } from "../constants";
+import { ApiActions, AppModules } from "../apis/v1/role/role.constant";
+
+export interface IPermissions {
+    entity: AppModules,
+    actions: ApiActions[]
+}
+
 export interface IRoleModel extends Document{
     _id: Types.ObjectId
     name: string;
     displayId: string;
-    permissions: string[];
-    description: string
-    createdAt: Date
-    updatedAt: Date
+    permissions: IPermissions[];
+    description: string;
+    isActive: boolean;
+    createdAt: Date;
+    updatedAt: Date;
 }
 
 
@@ -26,8 +34,24 @@ const roleSchema = new Schema({
         required: false
     },
     permissions: {
-        type: Array,
-        required: false
+        type: [
+            {
+                entity: {
+                    type: String,
+                    required: true
+                },
+                actions: {
+                    type: [String],
+                    required: true
+                }
+            }
+        ],
+        required: false,
+        default: []
+    },
+    isActive: {
+        type: Boolean,
+        default: true
     }
 
 }, {

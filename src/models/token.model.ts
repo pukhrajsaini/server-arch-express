@@ -2,8 +2,7 @@ import { Document, model, Schema, Types } from "mongoose";
 import { DB_MODELS } from "../constants";
 
 export interface ITokenModel extends Document {
-    userId?: Types.ObjectId;
-    adminId?: Types.ObjectId;
+    adminId: Types.ObjectId;
     isActive: boolean;
     createdAt: Date;
     updatedAt: string;
@@ -11,11 +10,6 @@ export interface ITokenModel extends Document {
 
 
 const tokenSchema = new Schema({
-    userId: {
-        type: Types.ObjectId,
-        required: false,
-        ref: DB_MODELS.USER
-    },
     adminId: {
         type: Types.ObjectId,
         required: false,

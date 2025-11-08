@@ -5,7 +5,7 @@ import { ApiAccess } from "../apis/api.constant";
 
 export interface IApiMetadata{
     module: AppModules,
-    actions: ApiActions,
+    action: ApiActions,
     access: ApiAccess,
 }
 export function setApiMetadata(metadata: IApiMetadata){

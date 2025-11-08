@@ -6,7 +6,7 @@ import jwtUtil from "../utils/jwt.util";
 import TokenModel from "../models/token.model";
 import AdminModel from "../models/admin.model";
 import { ApiAccess } from "../apis/api.constant";
-import RoleModel from "../models/role.model";
+import RoleModel, { IPermissions } from "../models/role.model";
 
 class AuthMiddleware {
 
@@ -113,12 +113,15 @@ class AuthMiddleware {
                 next();
             } else {
                 const role = await RoleModel.findOne({ _id: admin.roleId });
-                if (!role.permissions.includes(apiMetadata.module)) return sendResponse(
+
+                const permissions: IPermissions[] = role.permissions;
+                if (!permissions.some((permission) => (permission.entity === apiMetadata.module && permission.actions.includes(apiMetadata.action)))) return sendResponse(
                     res, {
                     status: HttpStatus.Unauthorized,
                     message: 'not_permitted'
                 }
                 );
+
                 req.admin = admin;
                 next();
 
