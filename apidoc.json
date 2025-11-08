@@ -1,0 +1,20 @@
+{
+  "name": "Smart Oven",
+  "version": "1.0.0",
+  "description": "API for managing Smart Oven functionalities",
+  "title": "Smart Oven API Documentation",
+  "sampleUrl": "http://10.200.201.10:8000/api/v1",
+  "header": {
+    "title": "Authentication"
+  },
+  "footer": {
+    "title": "Contact Us",
+    "content": "For support, email support@smartoven.com."
+  },
+  "template": {
+    "withCompare": true,
+    "withGenerator": true
+  },
+  "license": "MIT",
+  "author": "Smart Oven Inc."
+}
